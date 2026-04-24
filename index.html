@@ -1,22 +1,342 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تحدي الألف دولار</title>
-<style>
-body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #0f0c29; color: white; text-align: center; }
-.box { padding: 30px; border-radius: 20px; background: rgba(255,255,255,0.05); border: 2px solid #ff416c; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-h1 { color: #ff416c; font-size: 3.5rem; margin: 0; }
-p { font-size: 1.5rem; margin: 20px 0; }
-.free { color: #00df9a; font-weight: bold; font-size: 1.2rem; border: 1px solid #00df9a; padding: 5px 10px; border-radius: 10px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>نموذج تسجيل الدخول | إضاءة الحواف</title>
+  <!-- خط أنيق من Google Fonts لدعم العربية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 0;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 2.5rem;
+      padding: 2.8rem 2.2rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .title {
+      color: #ffffff;
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    .subtitle {
+      color: #b0b0d0;
+      text-align: center;
+      margin-bottom: 2.3rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .input-group {
+      margin-bottom: 1.8rem;
+      position: relative;
+    }
+
+    .input-label {
+      display: block;
+      color: #e0e0f0;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.25s;
+    }
+
+    /* حقل الإدخال الأساسي */
+    .modern-input {
+      width: 100%;
+      background: rgba(10, 10, 25, 0.65);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      border-radius: 1.2rem;
+      padding: 1rem 1.2rem;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      color: #ffffff;
+      outline: none;
+      transition: all 0.25s ease-in-out;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      letter-spacing: 0.3px;
+    }
+
+    .modern-input::placeholder {
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+
+    /* التأثير المطلوب: عند الضغط (التركيز) تضيء الحواف بلون متوهج */
+    .modern-input:focus {
+      border-color: #f0a500;
+      box-shadow: 0 0 18px 2px rgba(240, 165, 0, 0.7), 0 0 5px rgba(255, 200, 0, 0.5);
+      background: rgba(20, 20, 40, 0.8);
+    }
+
+    /* تأثير إضافي بسيط عند التمرير بالفأرة (اختياري) */
+    .modern-input:hover {
+      border-color: rgba(255, 255, 255, 0.45);
+      transition: border-color 0.2s;
+    }
+
+    /* أيقونة صغيرة داخل الحقل (تجميل فقط) */
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 1.2rem;
+      pointer-events: none;
+      transition: color 0.25s;
+    }
+
+    /* عند التركيز على الحقل يتغير لون الأيقونة */
+    .input-wrapper:focus-within .input-icon {
+      color: #f0a500;
+    }
+
+    /* تعديل padding الحقل بسبب وجود الأيقونة */
+    .input-with-icon {
+      padding-right: 2.8rem;
+    }
+
+    .options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 1.2rem 0 1.8rem;
+      color: #ccccdd;
+      font-size: 0.9rem;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .remember-me input {
+      accent-color: #f0a500;
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: #d4d4ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .forgot-link:hover {
+      color: #f0a500;
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: #f0a500;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: 'Tajawal', sans-serif;
+      color: #0a0a14;
+      background: linear-gradient(135deg, #f9b82b, #f0a500);
+      box-shadow: 0 8px 20px rgba(240, 165, 0, 0.45);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+      margin-top: 0.3rem;
+      border: 1px solid rgba(255, 255, 200, 0.5);
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(135deg, #ffc73a, #ffae00);
+      box-shadow: 0 12px 24px rgba(240, 165, 0, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .login-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 5px 14px rgba(240, 165, 0, 0.6);
+    }
+
+    .signup-text {
+      text-align: center;
+      margin-top: 1.8rem;
+      color: #b9b9d4;
+      font-size: 0.95rem;
+    }
+
+    .signup-text a {
+      color: #f0a500;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .signup-text a:hover {
+      text-decoration: underline;
+      color: #ffc107;
+    }
+
+    /* لمسة جمالية للشاشات الصغيرة */
+    @media (max-width: 450px) {
+      .login-card {
+        padding: 2rem 1.5rem;
+        border-radius: 2rem;
+      }
+      .title {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="box">
-<h1>عمك ناجي 🤣</h1>
-<p>هات 1000 دولار وبفتح لك موقع.. وإلا خليك ساكت!</p>
-<span class="free">التكلفة الفعلية للنشر: 0.00$</span>
-</div>
+  <div class="login-card">
+    <h2 class="title">مرحباً بك 👋</h2>
+    <p class="subtitle">قم بتسجيل الدخول للمتابعة</p>
+
+    <!-- الحقول مع الأيقونات وتأثير الإضاءة عند الضغط -->
+    <div class="input-group">
+      <label class="input-label" for="username">اسم المستخدم</label>
+      <div class="input-wrapper">
+        <span class="input-icon">👤</span>
+        <input 
+          type="text" 
+          id="username" 
+          class="modern-input input-with-icon" 
+          placeholder="أدخل اسم المستخدم" 
+          autocomplete="username" 
+          dir="auto"
+        >
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label" for="password">كلمة المرور</label>
+      <div class="input-wrapper">
+        <span class="input-icon">🔒</span>
+        <input 
+          type="password" 
+          id="password" 
+          class="modern-input input-with-icon" 
+          placeholder="أدخل كلمة المرور" 
+          autocomplete="current-password"
+        >
+      </div>
+    </div>
+
+    <div class="options-row">
+      <label class="remember-me">
+        <input type="checkbox" id="remember" checked>
+        <span>تذكرني</span>
+      </label>
+      <a href="#" class="forgot-link">نسيت كلمة المرور؟</a>
+    </div>
+
+    <button class="login-btn" id="loginButton">تسجيل الدخول</button>
+
+    <p class="signup-text">
+      ليس لديك حساب؟ <a href="#">إنشاء حساب جديد</a>
+    </p>
+  </div>
+
+  <!-- إضافة تفاعل بسيط عند الضغط على زر تسجيل الدخول (اختياري) -->
+  <script>
+    // مجرد عرض رسالة تجريبية عند النقر على زر الدخول، لتأكيد أن الحقول تعمل.
+    const loginBtn = document.getElementById('loginButton');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+
+    loginBtn.addEventListener('click', function(e) {
+      e.preventDefault(); // منع الإرسال الفعلي للنموذج لأنها صفحة تجريبية
+      
+      const user = usernameInput.value.trim();
+      const pass = passwordInput.value.trim();
+      
+      if (user === '' || pass === '') {
+        // تنبيه لطيف إذا كانت الحقول فارغة مع إضاءة الحقل الفارغ
+        if (user === '') {
+          usernameInput.focus();
+          // وميض خاطف لتذكير المستخدم
+          usernameInput.style.borderColor = '#ff4d6d';
+          usernameInput.style.boxShadow = '0 0 16px 2px rgba(255, 77, 109, 0.7)';
+          setTimeout(() => {
+            usernameInput.style.borderColor = '';
+            usernameInput.style.boxShadow = '';
+          }, 800);
+        } else if (pass === '') {
+          passwordInput.focus();
+          passwordInput.style.borderColor = '#ff4d6d';
+          passwordInput.style.boxShadow = '0 0 16px 2px rgba(255, 77, 109, 0.7)';
+          setTimeout(() => {
+            passwordInput.style.borderColor = '';
+            passwordInput.style.boxShadow = '';
+          }, 800);
+        }
+        alert('يرجى ملء اسم المستخدم وكلمة المرور.');
+        return;
+      }
+      
+      // محاكاة تسجيل دخول ناجح (رسالة تجريبية)
+      alert(`أهلاً ${user}! تم إرسال البيانات (تجريبي). الحواف تضيء عند الضغط على الحقول ✨`);
+      
+      // يمكنك إعادة تعيين الحقول أو توجيه المستخدم لاحقاً
+      // passwordInput.value = ''; 
+    });
+
+    // إزالة تأثير الخطأ المؤقت عند بدء الكتابة مرة أخرى (تحسين صغير)
+    usernameInput.addEventListener('input', function() {
+      if (usernameInput.style.borderColor === 'rgb(255, 77, 109)') {
+        usernameInput.style.borderColor = '';
+        usernameInput.style.boxShadow = '';
+      }
+    });
+    
+    passwordInput.addEventListener('input', function() {
+      if (passwordInput.style.borderColor === 'rgb(255, 77, 109)') {
+        passwordInput.style.borderColor = '';
+        passwordInput.style.boxShadow = '';
+      }
+    });
+
+    // ملاحظة: تأثير الإضاءة الأساسي يتم عبر CSS عند الـ focus، ويعمل تلقائياً عند الضغط على الحقل.
+    console.log('✨ جاهز: عند الضغط على اسم المستخدم أو كلمة المرور تضيء الحواف.');
+  </script>
 </body>
 </html>
